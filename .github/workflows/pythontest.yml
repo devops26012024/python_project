@@ -15,5 +15,7 @@ jobs:
       - name: environment vars 
         run: |
           echo "Environment is ${{vars.TARGET_VAR}}"
+          if ${{vars.TARGET_VAR}} == "dev" 
+            echo "I am in dev section" 
     
       
