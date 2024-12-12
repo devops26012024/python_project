@@ -15,41 +15,16 @@ jobs:
       - name: environment vars 
         run: |
           echo "Environment is ${{vars.TARGET_VAR}}"
-          if ${{vars.TARGET_VAR}} == "dev" 
+          if [ ${{vars.TARGET_VAR}} == "dev" ]; then 
             echo "I am in dev section" 
-
-
-
-name: Python Test Automation 
-
-on: 
-  push:
-  workflow_dispatch:
-    inputs:
-      target-env:
-        description: "Target environment (e.g., dev, stage, prod)"
-        required: true
-        type: string
-
-jobs:
-  Unit-test: 
-    runs-on: ubuntu-latest
-    environment: ${{ inputs.target-env }}
-    steps: 
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Environment Variables
-        run: |
-          echo "Environment is ${{ vars.TARGET_VAR }}"
-          if [ "${{ vars.TARGET_VAR }}" = "dev" ]; then
-            echo "I am in dev section"
-          elif [ "${{ vars.TARGET_VAR }}" = "stage" ]; then
-            echo "I am in stage section"
-          elif [ "${{ vars.TARGET_VAR }}" = "prod" ]; then
-            echo "I am in production section"
-          else
-            echo "Unknown environment: ${{ vars.TARGET_VAR }}"
+          elif [ ${{vars.TARGET_VAR}} == "stage" ]; then 
+            echo "I am in stage section" 
+          elif [ ${{vars.TARGET_VAR}} == "prod" ]; then 
+            echo "I am in production section" 
+          else 
+            echo "Unknown environment: {{vars.TARGET_VAR}}"
           fi
-    
+            
+            
+
       
