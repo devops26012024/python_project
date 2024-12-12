@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{inputs.target-env}}
     steps: 
-      - name: echo environment vars 
+      - name: environment vars 
         run: |
-          echo: "Environment is ${{vars.TARGET_VAR}}"
+          echo "Environment is ${{vars.TARGET_VAR}}"
     
       
