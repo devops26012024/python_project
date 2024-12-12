@@ -16,11 +16,12 @@ jobs:
         run: |
           echo "Environment is ${{vars.TARGET_VAR}}"
           if [ ${{vars.TARGET_VAR}} == "dev" ]; then 
-            echo "I am in dev section" 
+            echo "I am in dev branch" 
+            
           elif [ ${{vars.TARGET_VAR}} == "stage" ]; then 
-            echo "I am in stage section" 
+            echo "I am in stage branch" 
           elif [ ${{vars.TARGET_VAR}} == "prod" ]; then 
-            echo "I am in production section" 
+            echo "I am in production branch" 
           else 
             echo "Unknown environment: {{vars.TARGET_VAR}}"
           fi
