@@ -22,6 +22,10 @@ jobs:
           TARGET_VAR: ${{ inputs.target-env }}
           DEV_VALUE_A: ${{ vars.DEV_VALUE_A }}
           DEV_VALUE_B: ${{ vars.DEV_VALUE_B }}
+          STAGE_VALUE_A: ${{ vars.STAGE_VALUE_A }}
+          STAGE_VALUE_B: ${{ vars.STAGE_VALUE_B }}
+          PROD_VALUE_A: ${{ vars.PROD_VALUE_A }}
+          PROD_VALUE_B: ${{ vars.PROD_VALUE_B }}
         run: |
           echo "Environment is $TARGET_VAR"
 
@@ -33,12 +37,12 @@ jobs:
           elif [ "$TARGET_VAR" = "stage" ]; then
             echo "I am in the stage branch"
             STAGE_RESULT=$((STAGE_VALUE_A + STAGE_VALUE_B))
-            echo "STAGE Branch result is $STAGE_RESULT"
+            echo "Stage Branch result is $STAGE_RESULT"
 
           elif [ "$TARGET_VAR" = "prod" ]; then
             echo "I am in the production branch"
             PROD_RESULT=$((PROD_VALUE_A + PROD_VALUE_B))
-            echo "Dev Branch result is $PROD_RESULT"
+            echo "Production Branch result is $PROD_RESULT"
 
           else
             echo "Unknown environment: $TARGET_VAR"
