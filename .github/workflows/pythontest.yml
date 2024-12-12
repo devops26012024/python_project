@@ -2,11 +2,18 @@ name: Python Test Automation
 
 on: 
   push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      target-env:
+        type: environment
 
 jobs:
-  test: 
+  Unit-test: 
     runs-on: ubuntu-latest
+    environment: ${{inputs.target-env}}
+    steps: 
+      - name: echo environment vars 
+        run: |
+          echo: "Environment is ${{vars.TARGET_VAR}}"
     
       
