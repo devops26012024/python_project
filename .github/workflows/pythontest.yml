@@ -29,4 +29,44 @@ jobs:
           fi
             
             
+name: Python Test Automation
 
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      target-env:
+        description: "Target environment (dev, stage, prod)"
+        required: true
+        type: string
+
+jobs:
+  Unit-test: 
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.target-env }}
+    steps: 
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Environment Variables
+        env:
+          TARGET_VAR: ${{ inputs.target-env }}
+          DEV_VALUE_A: ${{ vars.DEV_VALUE_A }}
+          DEV_VALUE_B: ${{ vars.DEV_VALUE_B }}
+        run: |
+          echo "Environment is $TARGET_VAR"
+
+          if [ "$TARGET_VAR" = "dev" ]; then
+            echo "I am in the dev branch"
+            DEV_RESULT=$((DEV_VALUE_A + DEV_VALUE_B))
+            echo "Dev Branch result is $DEV_RESULT"
+
+          elif [ "$TARGET_VAR" = "stage" ]; then
+            echo "I am in the stage branch"
+
+          elif [ "$TARGET_VAR" = "prod" ]; then
+            echo "I am in the production branch"
+
+          else
+            echo "Unknown environment: $TARGET_VAR"
+          fi
