@@ -1,4 +1,4 @@
-name: Python Test Automation 
+name: Python Test Automation
 
 on: 
   push:
@@ -10,22 +10,30 @@ on:
 jobs:
   Unit-test: 
     runs-on: ubuntu-latest
-    environment: ${{inputs.target-env}}
+    environment: ${{ inputs.target-env }}
     steps: 
-      - name: environment vars 
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Environment Variables
+        env:
+          TARGET_VAR: ${{ inputs.target-env }}
+          DEV_VALUE_A: ${{ vars.DEV_VALUE_A }}
+          DEV_VALUE_B: ${{ vars.DEV_VALUE_B }}
         run: |
-          echo "Environment is ${{vars.TARGET_VAR}}"
-          if [ ${{vars.TARGET_VAR}} = "dev" ]; then 
-            echo "I am in dev branch" 
-              DEV_RESULT=$((DEV_VALUE_A + DEV_VALUE_B))
-              echo "Dev Branch result is $DEV_RESULT"
+          echo "Environment is $TARGET_VAR"
 
-          elif [ ${{vars.TARGET_VAR}} = "stage" ]; then 
-            echo "I am in stage branch" 
+          if [ "$TARGET_VAR" = "dev" ]; then
+            echo "I am in the dev branch"
+            DEV_RESULT=$((DEV_VALUE_A + DEV_VALUE_B))
+            echo "Dev Branch result is $DEV_RESULT"
 
-          elif [ ${{vars.TARGET_VAR}} = "prod" ]; then 
-            echo "I am in production branch" 
+          elif [ "$TARGET_VAR" = "stage" ]; then
+            echo "I am in the stage branch"
 
-          else 
-            echo "Unknown environment {{vars.TARGET_VAR}}"
+          elif [ "$TARGET_VAR" = "prod" ]; then
+            echo "I am in the production branch"
+
+          else
+            echo "Unknown environment: $TARGET_VAR"
           fi
