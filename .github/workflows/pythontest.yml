@@ -18,8 +18,8 @@ jobs:
           if [ ${{vars.TARGET_VAR}} == "dev" ]; then 
             echo "I am in dev branch" 
             env:
-              Dev_result = [${{vars.DEV_VALUE_A}} + ${{vars.DEV_VALUE_B}}]
-              echo "Dev Branch result is ${{Dev_result}}"
+              DEV_RESULT=$((DEV_VALUE_A + DEV_VALUE_B))
+              echo "Dev Branch result is $DEV_RESULT"
           elif [ ${{vars.TARGET_VAR}} == "stage" ]; then 
             echo "I am in stage branch" 
           elif [ ${{vars.TARGET_VAR}} == "prod" ]; then 
