@@ -5,6 +5,8 @@ on:
   workflow_dispatch:
     inputs:
       target-env:
+        description: "Target environment (dev, stage, prod)"
+        required: true
         type: environment
 
 jobs:
