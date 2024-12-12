@@ -45,5 +45,5 @@ jobs:
             echo "Production Branch result is $PROD_RESULT"
 
           else
-            echo "Unknown environment: $TARGET_VAR"
+            echo "Unknown environment $TARGET_VAR"
           fi
